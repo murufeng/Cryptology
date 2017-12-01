@@ -2,7 +2,7 @@
 using namespace std;
 void main()
 {
-	int n,u,n1,n2,b1,b2,t,k,r,w;
+	int n,u,n1,n2,b1,b2,t,k,r,w,c;
 	cout<<"please input two interger u and n:"<<endl;
 	cout<<"u=";
 	cin>>u;
@@ -29,5 +29,7 @@ void main()
 	{
 		w=(n+b2)%n;
 		cout<<u<<"模"<<n<<"的逆元:"<<w<<endl;
+		c=w%n;
+		cout<<w<<"mod"<<n<<"="<<c<<endl;
 	}
 }

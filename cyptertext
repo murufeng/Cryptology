@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+int mod(int u,int n);
+void main()
+{
+	int i,j,k,t;
+	char m[10000],n[10000],c[10000];
+	cout<<"please input ciphertext as m:";
+    gets(m);
+	for(i=0;i<strlen(m);i++)
+	{
+		for(j=0;j<strlen(m);i++)
+		{
+			if(m[i]<='z'&&m[i]>='a')
+			{
+			      n[j]=m[i]-'a';
+			}
+			else if(m[i]<='Z'&&m[i]>='A')
+			{
+				n[j]=m[i]-'A';
+			}
+			else
+			{
+				n[j]=m[i];
+			}
+		}
+	}
+	cout<<"已知单标仿射加密变换为：(11m+2)mod26:"<<endl;
+	t=mod(11,26);
+	cout<<"解密结果为:";
+	for(k=0;k<strlen(m);k++)
+	{
+		c[k]=(t*(n[j]-2))%26;
+		cout<<c[k];
+	}
+	cout<<endl;
+}
+int mod(int u,int n)
+{
+	int n1,n2,b1,b2,t,k,r,w;
+	n1=n,n2=u,b1=0,b2=1;
+	k=n1/n2;
+	r=n1-k*n2;
+	if(r!=0)
+	{
+		n1=n2;
+		n2=r;
+		t=b2;
+		b2=b1-k*b2;
+		b1=t;
+		k=n1/n2;
+	    r=n1-k*n2;
+	}
+	if(n2!=1)
+	{
+		cout<<u<<"模"<<n<<"不存在逆元"<<endl;
+	}
+	if(n2==1)
+	{
+		w=(n+b2)%n;
+		cout<<u<<"模"<<n<<"的逆元:"<<w<<endl;
+	}
+	return w;
+}

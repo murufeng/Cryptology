@@ -1,43 +1,47 @@
 #include <iostream>
-#include<string>
 using namespace std;
 int mod(int u,int n);
 void main()
 {
-	int i,t;
-	char m[10000],n[10000],c[10000];
+	int a,b,i,t;
+	int n=26;
+	char m[10000];
 	cout<<"please input ciphertext as m:";
-    cin>>m;
+    gets(m);
+	cout<<"please input a :";
+	cin>>a;
+	cout<<"please input b:";
+	cin>>b;
+	cout<<"密文:";
+	for(i=0;i<strlen(m);i++)
+	{
+		cout<<m[i];
+	}
+	cout<<endl;
+	t=mod(a,n);
 	for(i=0;i<strlen(m);i++)
 	{
 		if(m[i]<='z'&&m[i]>='a')
 			{
-			      n[i]=m[i]-'a';
+			     m[i]=m[i]-'a';
+				 m[i]=(t*(m[i]-b+n))%n;
+				 m[i]=m[i]+'a';
 			}
 			else if(m[i]<='Z'&&m[i]>='A')
 			{
-				n[i]=m[i]-'A';
+				m[i]=m[i]-'A';
+				m[i]=(t*(m[i]-b+n))%n;
+				m[i]=m[i]+'A';
 			}
 			else
 			{
-				n[i]=m[i];
+				m[i]=m[i];
 			}
 	}
-	cout<<"已知单标仿射加密变换为：(11m+2)mod26"<<endl;
-	t=mod(11,26);
-	if(t==0)
+	cout<<"解密后明文:";
+	for(i=0;i<strlen(m);i++)
 	{
-		cout<<"逆不存在"<<endl;
-	}
-	if(t!=0)
-	{
-	  cout<<"11mod26的逆为"<<t<<endl;
-	  cout<<"解密结果为:";
-	  for(i=0;i<strlen(m);i++)
-	  {
-		c[i]=(t*(n[i]-2))%26;
-		cout<<c[i];
-	  }
+		cout<<m[i];
 	}
 	cout<<endl;
 }

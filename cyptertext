@@ -4,45 +4,50 @@ using namespace std;
 int mod(int u,int n);
 void main()
 {
-	int i,j,k,t;
+	int i,t;
 	char m[10000],n[10000],c[10000];
 	cout<<"please input ciphertext as m:";
-    gets(m);
+    cin>>m;
 	for(i=0;i<strlen(m);i++)
 	{
-		for(j=0;j<strlen(m);i++)
-		{
-			if(m[i]<='z'&&m[i]>='a')
+		if(m[i]<='z'&&m[i]>='a')
 			{
-			      n[j]=m[i]-'a';
+			      n[i]=m[i]-'a';
 			}
 			else if(m[i]<='Z'&&m[i]>='A')
 			{
-				n[j]=m[i]-'A';
+				n[i]=m[i]-'A';
 			}
 			else
 			{
-				n[j]=m[i];
+				n[i]=m[i];
 			}
-		}
 	}
-	cout<<"已知单标仿射加密变换为：(11m+2)mod26:"<<endl;
+	cout<<"已知单标仿射加密变换为：(11m+2)mod26"<<endl;
 	t=mod(11,26);
-	cout<<"解密结果为:";
-	for(k=0;k<strlen(m);k++)
+	if(t==0)
 	{
-		c[k]=(t*(n[j]-2))%26;
-		cout<<c[k];
+		cout<<"逆不存在"<<endl;
+	}
+	if(t!=0)
+	{
+	  cout<<"11mod26的逆为"<<t<<endl;
+	  cout<<"解密结果为:";
+	  for(i=0;i<strlen(m);i++)
+	  {
+		c[i]=(t*(n[i]-2))%26;
+		cout<<c[i];
+	  }
 	}
 	cout<<endl;
 }
 int mod(int u,int n)
 {
 	int n1,n2,b1,b2,t,k,r,w;
-	n1=n,n2=u,b1=0,b2=1;
+    n1=n,n2=u,b1=0,b2=1;
 	k=n1/n2;
 	r=n1-k*n2;
-	if(r!=0)
+	while(r!=0)
 	{
 		n1=n2;
 		n2=r;
@@ -52,14 +57,10 @@ int mod(int u,int n)
 		k=n1/n2;
 	    r=n1-k*n2;
 	}
-	if(n2!=1)
-	{
-		cout<<u<<"模"<<n<<"不存在逆元"<<endl;
-	}
 	if(n2==1)
 	{
 		w=(n+b2)%n;
-		cout<<u<<"模"<<n<<"的逆元:"<<w<<endl;
+		return w;
 	}
-	return w;
+	return 0;		  
 }

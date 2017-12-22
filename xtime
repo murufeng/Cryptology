@@ -1,5 +1,3 @@
-
-
 #include<stdio.h>
 
 unsigned char XTIME(unsigned char x);
@@ -14,40 +12,39 @@ int main()
 
 {
 
- 
+ 
 
-    unsigned char z;
+    unsigned char z;
 
-    int a,b,i;
+    int a,b;
 
-    printf("请输入两个16进制数:");
+    printf("请输入两个16进制数:");
 
-    scanf("%x
-%x",&a,&b);
+    scanf("%x %x",&a,&b);
 
-    z=multiply(a,b);
+    z=multiply(a,b);
 
-    printf("十六进制乘法表示:");
+    printf("十六进制乘法表示:");
 
-    printf("%x*%x=",a,b);
+    printf("%x*%x=",a,b);
 
-    printf("%x\n",z);
+    printf("%x\n",z);
 
-    printf("二进制的乘法表示:");
+    printf("二进制的乘法表示:");
 
-    exchange(a);
+    exchange(a);
 
-    printf("*");
+    printf("*");
 
-    exchange(b);
+    exchange(b);
 
-    printf("=");
+    printf("=");
 
-    exchange(z);
+    exchange(z);
 
-    printf("\n");
+    printf("\n");
 
-    return 0;
+    return 0;
 
 }
 
@@ -55,74 +52,66 @@ int exchange(int x)
 
 {
 
-    int i,A[N];
+    int i,A[N];
 
-    for(i=0;i!=N;i++)
+    for(i=0;i!=N;i++)
 
-    {
+    {
 
-        A[N-1-i]=x%2;
+        A[N-1-i]=x%2;
 
-        x/=2;
+        x/=2;
 
-    }
+    }
 
-    for(i=0;i!=N;i++)
+    for(i=0;i!=N;i++)
 
-    {
+    {
 
-        printf("%d",
-A[i]);
+        printf("%d",A[i]);
 
-    }
+    }
 
-    return 0;
-
-}
-
- 
-
-unsigned char XTIME(unsigned char x) { 
-
-
-    return ((x << 1) ^ ((x
-& 0x80) ? 0x1b : 0x00));  
+    return 0;
 
 }
 
-  
 
-unsigned char multiply(unsigned char a, unsigned char b) {  
+unsigned char XTIME(unsigned char x) 
+{ 
+    return ((x << 1) ^ ((x& 0x80) ? 0x1b : 0x00));  
+}
 
-    unsigned char temp[8] = { a
-};  
+  
 
-    unsigned char tempmultiply =
-0x00;  
+unsigned char multiply(unsigned char a, unsigned char b) 
+{  
 
-    int i = 0;  
+    unsigned char temp[8] = { a};  
 
-    for (i = 1; i < 8; i++) {  
+    unsigned char tempmultiply =0x00;  
 
-        temp[i] = XTIME(temp[i -
-1]);  
+    int i = 0;  
 
-    } 
+    for (i = 1; i < 8; i++) {  
 
+        temp[i] = XTIME(temp[i -1]);  
 
-    tempmultiply = (b & 0x01) *
-a;  
-
-    for (i = 1; i <= 7; i++)
-{  
-
-        tempmultiply ^= (((b >>
-i) & 0x01) * temp[i]);  
-
-    } 
+    } 
 
 
-    return tempmultiply;  
+    tempmultiply = (b & 0x01) *a;  
+
+    for (i = 1; i <= 7; i++)
+{  
+
+        tempmultiply ^= (((b >>i) & 0x01) * temp[i]);  
+
+    } 
+
+
+    return tempmultiply;  
 
 }
+
 
